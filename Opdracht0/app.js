@@ -1,27 +1,24 @@
-const http = require('http');
-const fs = require('fs');
+let cars = []
 
+const automerken = ['BMW', 'Mercedes', 'Ferrari', 'Lada']
 
-const hostname = '127.0.0.1';
-const port = 3000;
-
-let student;
-
-fs.readFile('data.json', (err, data) => {
-    if (err) throw err;
-    student = JSON.stringify(JSON.parse(data));
+class car {
+  constructor(merk, model){
+    this.merk = merk
+    this.model = model
+  }
+}
+automerken.forEach(merk => {
+  for(let i = 1; i < 4; i++){
+    cars.push(new car(merk, i))
+  }
 });
 
+cars.forEach((auto, index) => {
 
-const requestListener = function (req, res) {
-    res.setHeader("Content-Type", "application/json")
-    res.writeHead(200);
-    res.end(student);
-    
-};
-
-const server = http.createServer(requestListener);
-
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+    if(auto.merk == 'Ferrari'){
+      cars[index].PK = index * 200
+    }
 });
+
+console.log(cars)
