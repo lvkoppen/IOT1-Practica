@@ -5,7 +5,7 @@ var client  = mqtt.connect('mqtt://broker.mqttdashboard.com')
 client.on('connect', function () {
     client.subscribe('iotpractica/receive', function (err) {
       if (client.connected==true) {
-        client.publish('iotpractica', 'Hoi ik ben hier om te luisteren')
+        console.log('connected')
       }
       else{
           console.log('not connected')
