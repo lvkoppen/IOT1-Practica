@@ -50,12 +50,17 @@ function print() {
         console.log(chalk.rgb(0, 0, 0).underline('Light is switched off'));
 	}
 	else {
-		console.log(chalk.rgb(lampsettings.rgb.r, lampsettings.rgb.g, lampsettings.rbg.b)('This is a simulated bulb'));
+		console.log(chalk.rgb(lampsettings.rgb.r, lampsettings.rgb.g, lampsettings.rgb.b)('This is a simulated bulb'));
 	}
 }
 
 function updatesettings(settings){
-  lampsettings = settings;
+  if(typeof settings !== 'undefined' && settings){
+    lampsettings = settings;
+    console.log('Dit zijn nieuwe settings')
+    console.log(settings)
+  }
+  
 }
 
 function changestatus(state){
@@ -70,6 +75,7 @@ function beweging(){
 client.on('message', function (topic, message) {
       switch(topic){
         case 'gebouw/lampen':
+          
           updatesettings(JSON.parse(message.toString()));
           break;
         case 'gebouw/beweging':

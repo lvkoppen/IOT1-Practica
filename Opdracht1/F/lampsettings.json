@@ -1,6 +1,6 @@
 { 
     "interval" : 5000,
-    "status": 1,
+    "status": 0,
     "rgb":{
         "r":170,
         "g":255,

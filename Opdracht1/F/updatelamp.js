@@ -27,7 +27,7 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-console.log("Press enter voor updaten");
+console.log("Press enter om de lampen te updaten");
 
 
 rl.on('line', (input) => {
