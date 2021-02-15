@@ -16,7 +16,7 @@ client.on('connect', function () {
 
 var lampsetting;
 
-fs.readFile('C:\\Users\\Lennart\\Desktop\\IoT1-Practica\\IOT1-Practica\\Opdracht1\\G\\lampsettings.json', (err, data) => {
+fs.readFile('C:\\Users\\Lennart\\Desktop\\IoT1-Practica\\IOT1-Practica\\Opdracht1\\H\\lampsettings.json', (err, data) => {
     if (err) throw err;
     lampsetting = JSON.stringify(JSON.parse(data));
 });
