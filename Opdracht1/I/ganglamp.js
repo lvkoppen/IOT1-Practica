@@ -28,14 +28,11 @@ var lampsettings = {
 console.log(chalk.rgb(lampsettings.rgb.r, lampsettings.rgb.g, lampsettings.rgb.b).underline('This is a simulated dimmable bulb'));
 
 lampsettings.status = 0
-print();
 lampsettings.rgb.r = 128;
 lampsettings.rgb.g = 128;
 lampsettings.rgb.b = 128;
 
 
-
-setInterval(print, 2000);
 setInterval(alarm, lampsettings.interval);
 
 
@@ -70,9 +67,11 @@ function alarm(){
     else {
       lampsettings.status = 0
     }
+    print()
   }
 }
 
 client.on('message', function (topic, message) {
           updatesettings(JSON.parse(message.toString()));
+          print();no
 });

@@ -23,11 +23,6 @@ client.on('connect', function () {
 var helderheid=255;
 console.log(chalk.rgb(helderheid, helderheid, helderheid).underline('This is a simulated dimmable bulb'));
 
-helderheid = 0;
-print();
-helderheid = 128;
-setInterval(print, 2000);
-
 function print() {
 	//console.clear();
 	if (helderheid==0) {
@@ -40,4 +35,6 @@ function print() {
 
 client.on('message', function (topic, message) {
     helderheid = Number(message.toString());
+    print()
+
   })

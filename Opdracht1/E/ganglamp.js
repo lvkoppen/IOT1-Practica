@@ -23,10 +23,6 @@ client.on('connect', function () {
 var helderheid=255;
 console.log(chalk.rgb(helderheid, helderheid, helderheid).underline('This is a simulated dimmable bulb'));
 
-helderheid = 0;
-print();
-helderheid = 128;
-setInterval(print, 2000);
 
 function print() {
 	//console.clear();
@@ -37,15 +33,20 @@ function print() {
 		console.log(chalk.rgb(helderheid, helderheid, helderheid)('This is a simulated bulb'));
 	}
 }
-
+var timeOutReset;
 function Lightson(sterkte){
   helderheid = sterkte;
+  print();
+  timeOutReset = setTimeout(function(){Lightsoff();},3000);
 }
+
 function Lightsoff(){
   helderheid = 0;
+  print();
 }
 
 client.on('message', function (topic, message) {
+    clearTimeout(timeOutReset)
     Lightson(Number(message.toString()))
-    setTimeout(Lightsoff, 5000)
+
   });
