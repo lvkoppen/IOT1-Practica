@@ -14,8 +14,7 @@
 //
 // Using the Azure CLI:
 // az iot hub device-identity show-connection-string --hub-name {YourIoTHubName} --device-id MyNodeDevice --output table
-var connectionString =
-  "HostName=DelftIotHubPracticum2021.azure-devices.net;SharedAccessKeyName=service;DeviceId=device-student-22-device-1;SharedAccessKey=7c3SGtU21s8fUjcSGMMjXsO5sebBaPu2ix9Zg1Pj/I4=";
+var connectionString = 'HostName=DelftIotHubPracticum2021.azure-devices.net;SharedAccessKeyName=service;DeviceId=device-student-22-device-1;SharedAccessKey=7c3SGtU21s8fUjcSGMMjXsO5sebBaPu2ix9Zg1Pj/I4=';
 
 // Using the Node.js Device SDK for IoT Hub:
 //   https://github.com/Azure/azure-iot-sdk-node
@@ -23,25 +22,25 @@ var connectionString =
 var Mqtt = require('azure-iot-device-mqtt').Mqtt;
 var DeviceClient = require('azure-iot-device').Client
 var Message = require('azure-iot-device').Message;
-const readline = require('readline');
 
 var client = DeviceClient.fromConnectionString(connectionString, Mqtt);
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+// Create a message and send it to the IoT hub every second
+setInterval(function(){
+  // Simulate telemetry.
+  var temperature = 20 + (Math.random() * 15);
+  var message = new Message(JSON.stringify({
+    temperature: temperature,
+    humidity: 60 + (Math.random() * 20)
+  }));
 
-client.on('message', (msg) => {
-  msg = JSON.parse(msg.getData());
-      console.log(msg);
-});
+  // Add a custom application property to the message.
+  // An IoT hub can filter on these properties without access to the message body.
+  message.properties.add('temperatureAlert', (temperature > 30) ? 'true' : 'false');
 
-rl.on('line', (input) => {
-  console.log("Er is beweging geconstateerd");
+  console.log('Sending message: ' + message.getData());
 
-  var message = new Message(JSON.stringify({beweging: true}))
-
+  // Send the message.
   client.sendEvent(message, function (err) {
     if (err) {
       console.error('send error: ' + err.toString());
@@ -49,6 +48,4 @@ rl.on('line', (input) => {
       console.log('message sent');
     }
   });
-});
-
-
+}, 1000);
