@@ -1,7 +1,10 @@
 'use strict';
 
-var connectionString =
-  "HostName=DelftIotHubPracticum2021.azure-devices.net;SharedAccessKeyName=service;DeviceId=device-student-22-device-1;SharedAccessKey=7c3SGtU21s8fUjcSGMMjXsO5sebBaPu2ix9Zg1Pj/I4=";
+
+const deviceId = "device-student-22-device-1";
+const sas = "ff2aanu0rv7UfoGB1b8NFT2Sp0qRlbJcS/t314PBtd0=";
+
+const connectionString = `HostName=DelftIotHubPracticum2021.azure-devices.net;DeviceId=${deviceId};SharedAccessKey=${sas};`
 
 var Mqtt = require('azure-iot-device-mqtt').Mqtt;
 var DeviceClient = require('azure-iot-device').Client
@@ -33,5 +36,4 @@ rl.on('line', (input) => {
     }
   });
 });
-
 
