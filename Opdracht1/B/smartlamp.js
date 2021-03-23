@@ -36,5 +36,4 @@ function print() {
 client.on('message', function (topic, message) {
     helderheid = Number(message.toString());
     print()
-
-  })
+  });
