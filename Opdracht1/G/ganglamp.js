@@ -67,8 +67,10 @@ function beweging(){
 client.on('message', function (topic, message) {
       switch(topic){
         case 'gebouw/lampen':
-          updatesettings(JSON.parse(message.toString()));
+          changestate
           break;
+        case 'gebouw/lampen/update':
+          updatesettings(JSON.parse(message.toString()));
         default:
           console.log("geen juiste topic gevonden");
           break;
