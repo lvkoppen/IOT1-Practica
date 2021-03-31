@@ -49,6 +49,17 @@ app.post("/lamp", (req,res) => {
 
 });
 
+app.delete("/lamp/:id", (req,res) => {
+
+    if(!devices.some(device => device.deviceId == parseInt(req.params.id))){
+        return res.status(404).json({ message: 'Not Found' });
+    }
+
+    devices = devices.filter(element => element.deviceId != req.params.id)
+    res.status(200).json({ message: "Deleted device: " + req.params.id});
+
+});
+
 app.listen(3000, () => {
     console.log("Server running on port 3000");
 });

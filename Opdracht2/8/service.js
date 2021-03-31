@@ -33,7 +33,7 @@
 
 var Client = require('azure-iothub').Client;
 var Message = require('azure-iot-device').Message;
-const fs = require('fs')
+
 
 const { EventHubConsumerClient } = require("@azure/event-hubs");
 

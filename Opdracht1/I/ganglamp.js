@@ -73,5 +73,5 @@ function alarm(){
 
 client.on('message', function (topic, message) {
           updatesettings(JSON.parse(message.toString()));
-          print();no
+          print();
 });
